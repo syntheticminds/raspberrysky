@@ -1,0 +1,4 @@
+*.pyc
+photos
+!.gitkeep
+settings.yaml

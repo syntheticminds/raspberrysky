@@ -1,0 +1,8 @@
+controller:
+  device: /dev/input/event0
+  left_thumbstick:
+    invert_y: true
+  right_thumbstick:
+    reverse: false
+telescope:
+  device: /dev/ttyUSB0
