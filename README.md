@@ -11,24 +11,13 @@ The aim is to make the telescope I have inherited steerable via a PS3 controller
 * Mini to standard USB cable
 
 ## Installation
-These instructions are for a fresh Rasbian Lite image. Dip in where you need to.
+These instructions are for a fresh Rasbian Lite image with SSH and WiFi enabled. Dip in where you need to.
 
     $ sudo apt-get update
     $ sudo apt-get dist-upgrade
 
-### Set up WiFi
-
-    $ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-
-Add the following lines to the file:
-
-    network={
-        ssid="Access Point Name"
-        psk="access_point_password"
-    }
-
 #### Disable wireless power saving
-    
+
     $ sudo nano /etc/network/interfaces
 
 Add the line `wireless-power off` to the end of the file.
@@ -83,7 +72,7 @@ We use a settings file to tell the script where to look for devices.
     $ cp settings.yaml.example settings.yaml
 
     $ python3 RaspberrySky.py
-    
+
 ## Controls
 The left thumbstick slews the telescope. How far you push the stick determins how fast it slews. The Right thumbstick makes small adjustments - ideal for finding and positioning objects in the eyepiece. The left and right triggers focus out and in respectively.
 
