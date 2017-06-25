@@ -4,43 +4,21 @@ This is a personal project I've started to improve my knowledge of Python while 
 The aim is to make the telescope I have inherited steerable via a PS3 controller. The original *Autostar II* handset it came with packed up and sadly the telescope has been gathering dust ever since. Now, with the help of a Raspberry Pi and a serial connection, the telescope has been revived.
 
 ## Requirements
-* A Raspberry Pi with WiFi and Bluetooth.
-* A PS3 Sixaxis Controller
+* A Raspberry Pi
 * A Meade LX200 telescope
-* USB to RS232 cable
-* Mini to standard USB cable
+* A USB to RS232 cable
 
-## Installation
-These instructions are for a fresh Rasbian Lite image with SSH and WiFi enabled. Dip in where you need to.
+A PS3 Sixaxis controller and bluetooth are required for manual control.
 
-    $ sudo apt-get update
-    $ sudo apt-get dist-upgrade
+## Basic installation
 
-#### Disable wireless power saving
-
-    $ sudo nano /etc/network/interfaces
-
-Add the line `wireless-power off` to the end of the file.
-
-### Raspberry Pi configuration
-
-    $ sudo raspi-config
-
-Enable the camera and expand the file system. When prompted, reboot the Pi.
-
-### Installing code and dependencies
-
-    $ sudo apt-get install python3-pip -y
+    $ cd ~
     $ sudo apt-get install git -y
-
-    $ sudo pip3 install picamera
-    $ sudo pip3 install evdev
-    $ sudo pip3 install pyserial
-    $ sudo pip3 install pyyaml --global-option="--without-libyaml"
-
     $ git clone http://www.github.com/syntheticminds/raspberrysky
+    $ cd raspberrysky
+    $ sudo bash install.sh
 
-### Pairing the controller
+### Controller support
 
     $ sudo apt-get install pi-bluetooth libusb-dev -y
 
@@ -65,6 +43,8 @@ Try the above command again and again if it says *not available*. If it says *Fa
     trust [MAC address]
     quit
 
+TODO: Controller configuration in settings.yaml
+
 ## Configuration
 We use a settings file to tell the script where to look for devices.
 
@@ -73,7 +53,7 @@ We use a settings file to tell the script where to look for devices.
 
     $ python3 RaspberrySky.py
 
-## Controls
-The left thumbstick slews the telescope. How far you push the stick determins how fast it slews. The Right thumbstick makes small adjustments - ideal for finding and positioning objects in the eyepiece. The left and right triggers focus out and in respectively.
+## Manual controls
+The left thumbstick slews the telescope. How far you push the stick determins how fast it slews. The right thumbstick makes small adjustments - ideal for finding and positioning objects in the eyepiece. The left and right triggers focus out and in respectively.
 
-Pressing X will take a photo if the Raspberry Pi camera is attached. Further integration of the camera is work in progress.
+TODO: Camera configuration in settings.yaml

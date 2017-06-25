@@ -1,4 +1,7 @@
+camera:
+  enabled: false
 controller:
+  enabled: false
   device: /dev/input/event0
   left_thumbstick:
     invert_y: true
