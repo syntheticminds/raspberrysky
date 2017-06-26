@@ -9,3 +9,7 @@ controller:
     reverse: false
 telescope:
   device: /dev/ttyUSB0
+site:
+  latitude: '51.074'
+  longitude: '-1.7936'
+  elevation: 50

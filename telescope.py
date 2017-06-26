@@ -1,32 +1,32 @@
 import serial
 import time
+import math
 
 class Telescope:
-    def __init__(self, debug=False):
-        self.debug = debug
+    def __init__(self, settings, debug=False):
+        self.__debug = debug
+        self.__device = settings['device']
         self.mount = Mount(self)
         self.focuser = Focuser(self)
         self.clock = Clock(self)
 
-    def connect(self, device):
+    def connect(self):
         self.__serial_port = serial.Serial(
-            port=device,
+            port=self.__device,
             baudrate=9600,
             bytesize=serial.EIGHTBITS,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
             timeout=5)
 
-        # Check the telescope is listening.
-        self.sendCommand(chr(0x06))
-
-        response = self.__getCharacterResponse()
-
-        if not response:
+        try:
+            self.sendCommand(chr(0x06))
+            response = self.__getCharacterResponse()
+        except Exception:
             raise Exception('Telescope did not reply.')
 
     def sendCommand(self, command, response_type='none'):
-        if self.debug:
+        if self.__debug:
             print(command)
 
         self.__serial_port.write(command.encode('ascii'))
@@ -54,12 +54,6 @@ class Telescope:
             return 'in_progress'
         else:
             return 'failed'
-
-    def setLocation(self):
-        self.sendCommand(':W1#')
-
-        self.sendCommand(':St+51*04#', 'boolean') # Latitude
-        self.sendCommand(':Sg1*47#', 'boolean') # Longitude
 
     def __getCharacterResponse(self):
         character = self.__serial_port.read(1)
@@ -133,6 +127,12 @@ class Focuser:
 class Mount:
     def __init__(self, telescope):
         self.telescope = telescope
+
+    def slewTo(self, coordinates):
+        self.telescope.sendCommand(':Sz%s*%s#' % (math.floor(coordinates[0]), round(coordinates[0] % 1 * 60)), 'boolean') # Azimuth
+        self.telescope.sendCommand(':Sa+%s*%s#' % (math.floor(coordinates[1]), round(coordinates[1] % 1 * 60)), 'boolean') # Altitude
+
+        return self.telescope.sendCommand(':MA#', 'boolean')
 
     def slew(self, direction):
         if direction == 'up':

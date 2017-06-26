@@ -1,12 +1,19 @@
 import evdev
 from threading import Thread
+import time
 
 import sys
 
+# invert_left = settings['controller']['left_thumbstick']['invert_y']
+# reverse_right = settings['controller']['right_thumbstick']['reverse']
+
 class Controller(Thread):
-    def __init__(self):
+    def __init__(self, settings):
         super(Controller, self).__init__()
+
         self.daemon = True
+
+        self.__device = settings['device']
 
         self.buttons = {
             'x': Button(),
@@ -24,9 +31,7 @@ class Controller(Thread):
             'right': Trigger()
         }
 
-    def connect(self, device):
-        self.__device = evdev.InputDevice(device)
-
+    def connect(self):
         if self.__device.name not in ('Sony PLAYSTATION(R)3 Controller', 'Sony Computer Entertainment Wireless Controller'):
             raise Exception('This is not a PS3 controller.')
 

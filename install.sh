@@ -15,3 +15,4 @@ sudo pip3 install picamera
 sudo pip3 install evdev
 sudo pip3 install pyserial
 sudo pip3 install pyyaml --global-option="--without-libyaml"
+sudo pip3 install ephem
