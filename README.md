@@ -1,14 +1,14 @@
 # Raspberry Sky
 This is a personal project I've started to improve my knowledge of Python while making something interesting.
 
-The aim is to make the telescope I have inherited steerable via a PS3 controller. The original *Autostar II* handset it came with packed up and sadly the telescope has been gathering dust ever since. Now, with the help of a Raspberry Pi and a serial connection, the telescope has been revived.
+The motivation came after the original *Autostar II* handset packed up. It occured to me that I had everything I needed to make a PS3 controller wirelessly operate the telescope. Since the initial proof of concept, this script's features have been improved to enable basic calibration and GoTo functions.
 
 ## Requirements
 * A Raspberry Pi
 * A Meade LX200 telescope
 * A USB to RS232 cable
 
-A PS3 Sixaxis controller and bluetooth are required for manual control.
+A PS3 Sixaxis controller and bluetooth are required for manual control. A Raspberry Pi camera is required to take photos.
 
 ## Basic installation
 
@@ -16,7 +16,7 @@ A PS3 Sixaxis controller and bluetooth are required for manual control.
     $ sudo apt-get install git -y
     $ git clone http://www.github.com/syntheticminds/raspberrysky
     $ cd raspberrysky
-    $ sudo bash install.sh
+    $ pip install
 
 ### Controller support
 
