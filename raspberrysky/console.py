@@ -13,9 +13,7 @@ class Console(Thread):
     def run(self):
         while True:
             if self.__command is None:
-                command = input('Enter a command: ')
-
-                self.__command = command.lower()
+                self.__command = input('Enter a command: ').lower()
 
     def getCommand(self):
         command = self.__command

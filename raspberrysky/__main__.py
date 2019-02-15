@@ -31,7 +31,7 @@ else:
 # Set up camera
 if settings['camera']['enabled']:
     camera = Camera()
-else
+else:
     camera = None
 
 # Start checking for events
