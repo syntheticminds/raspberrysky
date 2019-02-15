@@ -1,7 +1,7 @@
 camera:
-  enabled: false
+  enabled: true
 controller:
-  enabled: false
+  enabled: true
   device: /dev/input/event0
   left_thumbstick:
     invert_y: true
@@ -10,6 +10,6 @@ controller:
 telescope:
   device: /dev/ttyUSB0
 site:
-  latitude: '51.074'
-  longitude: '-1.7936'
-  elevation: 50
+  latitude: 50.7
+  longitude: -2
+  elevation: 70

@@ -11,6 +11,9 @@ class Telescope:
         self.clock = Clock(self)
 
     def connect(self):
+        if not self.__device:
+            return
+
         self.__serial_port = serial.Serial(
             port=self.__device,
             baudrate=9600,
@@ -29,6 +32,9 @@ class Telescope:
         if self.__debug:
             print(command)
 
+        if not self.__device:
+            return
+
         self.__serial_port.write(command.encode('ascii'))
 
         if response_type == 'boolean':
@@ -42,7 +48,7 @@ class Telescope:
 
         return response
 
-    def findHome(self):
+    def calibrate(self):
         self.sendCommand(':hF#')
 
     def queryHomeStatus(self):
@@ -56,6 +62,9 @@ class Telescope:
             return 'failed'
 
     def __getCharacterResponse(self):
+        if self.__serial_port is None:
+            return
+
         character = self.__serial_port.read(1)
 
         if len(character) != 1:
